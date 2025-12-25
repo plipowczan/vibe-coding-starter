@@ -1,5 +1,12 @@
+import { genPageMetadata } from '@/app/seo';
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
+
+export const metadata = genPageMetadata({
+  title: 'Security',
+  description:
+    'Learn about the security measures we employ to protect your personal information and funds at Mevolut.',
+});
 
 export default function Security() {
   return (
