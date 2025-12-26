@@ -1,280 +1,63 @@
-@import "tailwindcss";
-
-/* Configure dark mode to use class-based selector instead of prefers-color-scheme */
-@custom-variant dark (&:where(.dark, .dark *));
-
-@plugin "@tailwindcss/forms";
-@plugin "@tailwindcss/typography";
-
-@source "../node_modules/@shipixen/pliny/**/*.js";
-@source "../app/**/*.{js,ts,jsx,tsx,css,mdx}";
-@source "../pages/**/*.{js,ts,jsx,tsx,css,mdx}";
-@source "../components/**/*.{js,ts,jsx,tsx,css,mdx}";
-@source "../layouts/**/*.{js,ts,jsx,tsx,css,mdx}";
-@source "../demo/**/*.{js,ts,jsx,tsx,css,mdx}";
-@source "../data/**/*.mdx";
-
-@theme {
-  /* Line Height */
-  --line-height-11: 2.75rem;
-  --line-height-12: 3rem;
-  --line-height-13: 3.25rem;
-  --line-height-14: 3.5rem;
-
-  /* Font Family */
-  --font-sans: var(--font-space-default), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-display: var(--font-space-display), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-cursive: cursive;
-
-  /* Colors - Primary */
-  /* Source: data/config/colors.js - primary.lighter */
-  --color-primary-100: #fde047;
-  --color-primary-200: #fde047;
-  /* Source: data/config/colors.js - primary.light */
-  --color-primary-300: #facc15;
-  --color-primary-400: #facc15;
-  /* Source: data/config/colors.js - primary.main */
-  --color-primary-500: #eab308;
-  --color-primary-600: #eab308;
-  /* Source: data/config/colors.js - primary.dark */
-  --color-primary-700: #ca8a04;
-  --color-primary-800: #ca8a04;
-  /* Source: data/config/colors.js - primary.darker */
-  --color-primary-900: #a16207;
-
-  /* Colors - Secondary */
-  /* Source: data/config/colors.js - secondary.lighter */
-  --color-secondary-100: #6ee7b7;
-  --color-secondary-200: #6ee7b7;
-  /* Source: data/config/colors.js - secondary.light */
-  --color-secondary-300: #34d399;
-  --color-secondary-400: #34d399;
-  /* Source: data/config/colors.js - secondary.main */
-  --color-secondary-500: #10b981;
-  --color-secondary-600: #10b981;
-  /* Source: data/config/colors.js - secondary.dark */
-  --color-secondary-700: #059669;
-  --color-secondary-800: #059669;
-  /* Source: data/config/colors.js - secondary.darker */
-  --color-secondary-900: #047857;
-
-  /* Colors - Ring */
-  /* Source: data/config/colors.js - primary.dark */
-  --color-ring: #ca8a04;
-
-  /* Breakpoints */
-  --breakpoint-2xl: 87.5rem;
-  
-  /* Custom Height-based Breakpoints */
-  /* Note: Tailwind v4 requires height-based breakpoints to be defined using custom media queries.
-     These breakpoints enable responsive design based on viewport height (tall-sm, tall-md, etc.) */
-  @custom-media --tall-sm (min-height: 640px);
-  @custom-media --tall-md (min-height: 768px);
-  @custom-media --tall-lg (min-height: 1024px);
-  @custom-media --tall-xl (min-height: 1280px);
-  @custom-media --tall-2xl (min-height: 1536px);
-
-  /* Z-Index */
-  --z-index-60: 60;
-  --z-index-70: 70;
-  --z-index-80: 80;
-  --z-index-90: 90;
-  --z-index-100: 100;
-  --z-index-110: 110;
-
-  /* Transition Duration */
-  --duration-2000: 2000ms;
-  --duration-3000: 3000ms;
-
-  /* Animations */
-  --animate-tilt: tilt 10s linear infinite;
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-wiggle: wiggle 1s ease-in-out infinite;
-  --animate-fade-in-down-snail: fade-in-down 5s ease-in forwards;
-  --animate-fade-in-down-slower: fade-in-down 1.2s ease-in-out forwards;
-  --animate-fade-in-down-slow: fade-in-down 1s ease-in-out forwards;
-  --animate-fade-in-down-normal: fade-in-down 0.8s ease-in-out forwards;
-  --animate-fade-in-down-fast: fade-in-down 0.6s ease-in-out forwards;
-  --animate-fade-in-down-faster: fade-in-down 0.4s ease-in-out forwards;
-  --animate-rotate-left-to-right: rotate-left-to-right 3s ease-in-out infinite;
-  --animate-fade-in-down-normal-delay: fade-in-down 0.8s ease-in-out 2s forwards;
-  --animate-marquee: 30s marquee linear infinite;
-
-  /* Keyframes */
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
-
-  @keyframes fade-in-down {
-    0% {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes wiggle {
-    0%, 100% {
-      transform: rotate(-3deg);
-    }
-    50% {
-      transform: rotate(3deg);
-    }
-  }
-
-  @keyframes rotate-left-to-right {
-    0% {
-      transform: rotate(-35deg);
-    }
-    30% {
-      transform: rotate(-10deg);
-    }
-    50% {
-      transform: rotate(20deg);
-    }
-    60% {
-      transform: rotate(35deg);
-    }
-    70% {
-      transform: rotate(15deg);
-    }
-    80% {
-      transform: rotate(45deg);
-    }
-    90% {
-      transform: rotate(-10deg);
-    }
-    100% {
-      transform: rotate(-35deg);
-    }
-  }
-
-  @keyframes tilt {
-    0%, 50%, 100% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(0.5deg);
-    }
-    75% {
-      transform: rotate(-0.5deg);
-    }
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-}
-
-/* Define HSL color variables before @theme inline so they can be referenced */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-}
-
-.dark {
-  --background: 20 14.3% 4.1%;
-  --foreground: 0 0% 95%;
-  --card: 24 9.8% 10%;
-  --card-foreground: 0 0% 95%;
-  --popover: 0 0% 9%;
-  --popover-foreground: 0 0% 95%;
-  --muted: 0 0% 15%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 12 6.5% 15.1%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 85.7% 97.3%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-}
-
-@theme inline {
-  /* Colors - HSL based (reference CSS variables defined above) */
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-}
+@import 'tailwindcss';
 
 @layer base {
   :root {
-    --hard-shadow: 0px 29px 52px 0px rgba(0, 0, 0, 0.4),
+    --hard-shadow:
+      0px 29px 52px 0px rgba(0, 0, 0, 0.4),
       22px 25px 16px 0px rgba(0, 0, 0, 0.2);
-    --hard-shadow-left: 0px 29px 52px 0px rgba(0, 0, 0, 0.4),
+    --hard-shadow-left:
+      0px 29px 52px 0px rgba(0, 0, 0, 0.4),
       -22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
     --primary-foreground: 355.7 100% 97.3%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
     --radius: 0.5rem;
-    
-    /* Color variables for gradients and backgrounds */
-    /* Source: data/config/colors.js */
-    --primary-lighter: #fde047;
-    --primary-light: #facc15;
-    --primary-dark: #ca8a04;
-    --primary-darker: #a16207;
-    --secondary-lighter: #6ee7b7;
-    --secondary-light: #34d399;
-    --secondary-dark: #059669;
-    --secondary-darker: #047857;
   }
 
   .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
     --primary-foreground: 144.9 80.4% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
   }
 
   *,
   ::before,
   ::after {
-    @apply border-gray-100 dark:border-neutral-800;
+    border-color: rgb(243 244 246); /* gray-100 */
+  }
+
+  .dark *,
+  .dark ::before,
+  .dark ::after {
+    border-color: rgb(38 38 38); /* neutral-800 */
   }
 
   h1,
@@ -283,56 +66,8 @@
   h4,
   h5,
   h6 {
-    @apply font-semibold font-display;
-  }
-
-  /* Typography plugin customization */
-  /* Custom styling for rich text content (prose classes) */
-  .prose a {
-    color: var(--color-primary-500);
-  }
-  
-  .prose a:hover {
-    color: var(--color-primary-600);
-  }
-  
-  .prose a code {
-    color: var(--color-primary-400);
-  }
-  
-  .prose h1,
-  .prose h2 {
-    font-weight: 700;
-    letter-spacing: -0.025em;
-  }
-  
-  .prose h3 {
-    font-weight: 600;
-  }
-  
-  .prose code {
-    color: var(--color-primary-500);
-  }
-
-  .prose-invert a {
-    color: var(--color-primary-500);
-  }
-  
-  .prose-invert a:hover {
-    color: var(--color-primary-400);
-  }
-  
-  .prose-invert a code {
-    color: var(--color-primary-400);
-  }
-  
-  .prose-invert h1,
-  .prose-invert h2,
-  .prose-invert h3,
-  .prose-invert h4,
-  .prose-invert h5,
-  .prose-invert h6 {
-    color: rgb(243 244 246);
+    font-weight: 600; /* font-semibold */
+    font-family: var(--font-space-display, inherit); /* font-display */
   }
 }
 
@@ -383,15 +118,39 @@
   }
 
   .faq li h3 {
-    @apply font-semibold text-lg;
+    font-weight: 600; /* font-semibold */
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75rem;
   }
 
   .nav-link-active {
-    @apply opacity-80 py-2 rounded text-secondary-500 dark:text-slate-400;
+    opacity: 0.8; /* opacity-80 */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem;
+    border-radius: 0.25rem; /* rounded */
+    color: #10b981; /* text-secondary-500 (secondary.main) */
+  }
+
+  .dark .nav-link-active {
+    color: rgb(148 163 184); /* dark:text-slate-400 */
   }
 
   .nav-link {
-    @apply opacity-100 text-slate-900 dark:text-slate-200 hover:text-secondary-700 dark:hover:text-secondary-100 transition-all;
+    opacity: 1; /* opacity-100 */
+    color: rgb(15 23 42); /* text-slate-900 */
+    transition: all 0.15s ease-in-out; /* transition-all */
+  }
+
+  .dark .nav-link {
+    color: rgb(226 232 240); /* dark:text-slate-200 */
+  }
+
+  .nav-link:hover {
+    color: #059669; /* hover:text-secondary-700 (secondary.dark) */
+  }
+
+  .dark .nav-link:hover {
+    color: #6ee7b7; /* dark:hover:text-secondary-100 (secondary.lighter) */
   }
 
   /**
@@ -551,7 +310,8 @@
   .fancy-glass-contrast {
     --glass-color: 0, 0, 200;
 
-    background: radial-gradient(
+    background:
+      radial-gradient(
         63.94% 63.94% at 50% 0%,
         rgba(var(--glass-color), 0.12) 0%,
         rgba(var(--glass-color), 0) 100%
@@ -579,7 +339,8 @@
     content: '';
     width: calc(100% + 2px);
     height: calc(100% + 2px);
-    background: linear-gradient(
+    background:
+      linear-gradient(
         rgba(var(--glass-color), 0.12) 0%,
         rgba(var(--glass-color), 0) 74.04%
       ),
